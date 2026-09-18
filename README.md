@@ -22,6 +22,13 @@ Una aplicación divertida, visual e interactiva construida en **React Native / E
   - Detecta si el arreglo forma un **Rectángulo** o un **Cuadrado Perfecto**.
   - **Ajuste Responsivo Automático**: La cuadrícula calcula la altura y ancho disponibles para que el 100% de la cuadrícula quepa en pantalla **sin ningún desplazamiento (scroll)** tanto en formato vertical como panorámico.
 
+- 🍹 **Cóctel de Tablas / Mezcla (Novedad)**:
+  - **Detección de Movimiento (Shake)**: Al sacudir el móvil o pulsar el botón de mezclado, la multiplicación se parte en subcuadrados.
+  - Ejemplo para $10 \times 10 = 100$:
+    - Se descompone en **4 cuadrados de $5 \times 5$** ($25 + 25 + 25 + 25 = 100$).
+    - O en **$8 \times 8$ ($64$) + $6 \times 6$ ($36$) = $100$**.
+  - Enseña la propiedad distributiva de forma completamente visual.
+
 - 🎯 **Juego de Desafío y Práctica**:
   - Minijuego con preguntas interactivas y opciones múltiples.
   - Pista visual desplegable con la cuadrícula de bloques para ayudar a contar si se necesita apoyo.
@@ -39,7 +46,7 @@ Una aplicación divertida, visual e interactiva construida en **React Native / E
 
 ```text
 Tablas/
-├── App.tsx                      # Componente raíz y navegación por pestañas
+├── App.tsx                      # Componente raíz y navegación por 5 pestañas
 ├── src/
 │   ├── components/
 │   │   ├── NumberBlock.tsx      # Bloque individual estilo Numberblock con ojos y números
@@ -49,12 +56,15 @@ Tablas/
 │   ├── screens/
 │   │   ├── ExplorerScreen.tsx   # Vista principal de exploración de multiplicaciones
 │   │   ├── BuilderScreen.tsx    # Modo libre constructor sin scroll
+│   │   ├── MixScreen.tsx        # Cóctel y partición de bloques con sensor Shake 🍹
 │   │   ├── QuizScreen.tsx       # Juego interactivo de preguntas y estrellas
 │   │   └── RewardsScreen.tsx    # Álbum de logros y personajes
 │   ├── theme/
 │   │   └── colors.ts            # Esquemas de color y lemas de Numberblocks (1 al 12)
 │   └── utils/
-│       └── soundEngine.ts       # Sintetizador de efectos de sonido Web Audio
+│       ├── soundEngine.ts       # Sintetizador de efectos de sonido Web Audio
+│       ├── shakeSensor.ts       # Detección de sacudida para Web y Móvil
+│       └── decompositions.ts    # Lógica matemática de partición de bloques
 └── package.json
 ```
 
@@ -92,14 +102,6 @@ Tener instalado [Node.js](https://nodejs.org/) (v18 o superior) en tu sistema.
   npm run start
   ```
   Escanea el código QR proyectado en la consola desde la aplicación **Expo Go** (disponible para iOS y Android).
-
----
-
-## 📱 Diseño Responsivo Adapts-to-Screen
-
-Toda la aplicación utiliza cálculo dinámico de dimensiones:
-- **Cero Scrollbars**: Las matrices grandes ($10 \times 10 = 100$) reducen su escala automáticamente basándose en la altura de la ventana para evitar solapamientos con las barras de navegación.
-- **Numeración Garantizada**: Todas las celdas muestran sus números secuenciales sin truncamientos.
 
 ---
 

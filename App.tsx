@@ -9,11 +9,12 @@ import {
 } from "react-native";
 import { ExplorerScreen } from "./src/screens/ExplorerScreen";
 import { BuilderScreen } from "./src/screens/BuilderScreen";
+import { MixScreen } from "./src/screens/MixScreen";
 import { QuizScreen } from "./src/screens/QuizScreen";
 import { RewardsScreen } from "./src/screens/RewardsScreen";
 import { soundEngine } from "./src/utils/soundEngine";
 
-type TabName = "explorer" | "builder" | "quiz" | "rewards";
+type TabName = "explorer" | "builder" | "mix" | "quiz" | "rewards";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabName>("explorer");
@@ -29,6 +30,8 @@ export default function App() {
         return <ExplorerScreen />;
       case "builder":
         return <BuilderScreen />;
+      case "mix":
+        return <MixScreen />;
       case "quiz":
         return <QuizScreen />;
       case "rewards":
@@ -52,9 +55,7 @@ export default function App() {
           onPress={() => handleTabChange("explorer")}
         >
           <Text style={styles.tabIcon}>🎨</Text>
-          <Text
-            style={[styles.tabLabel, activeTab === "explorer" && styles.tabLabelActive]}
-          >
+          <Text style={[styles.tabLabel, activeTab === "explorer" && styles.tabLabelActive]}>
             Tablas
           </Text>
         </Pressable>
@@ -64,10 +65,18 @@ export default function App() {
           onPress={() => handleTabChange("builder")}
         >
           <Text style={styles.tabIcon}>🛠️</Text>
-          <Text
-            style={[styles.tabLabel, activeTab === "builder" && styles.tabLabelActive]}
-          >
+          <Text style={[styles.tabLabel, activeTab === "builder" && styles.tabLabelActive]}>
             Constructor
+          </Text>
+        </Pressable>
+
+        <Pressable
+          style={[styles.tabItem, activeTab === "mix" && styles.tabItemActive]}
+          onPress={() => handleTabChange("mix")}
+        >
+          <Text style={styles.tabIcon}>🍹</Text>
+          <Text style={[styles.tabLabel, activeTab === "mix" && styles.tabLabelActive]}>
+            Cóctel
           </Text>
         </Pressable>
 
@@ -76,9 +85,7 @@ export default function App() {
           onPress={() => handleTabChange("quiz")}
         >
           <Text style={styles.tabIcon}>🎯</Text>
-          <Text
-            style={[styles.tabLabel, activeTab === "quiz" && styles.tabLabelActive]}
-          >
+          <Text style={[styles.tabLabel, activeTab === "quiz" && styles.tabLabelActive]}>
             Desafío
           </Text>
         </Pressable>
@@ -88,9 +95,7 @@ export default function App() {
           onPress={() => handleTabChange("rewards")}
         >
           <Text style={styles.tabIcon}>🏆</Text>
-          <Text
-            style={[styles.tabLabel, activeTab === "rewards" && styles.tabLabelActive]}
-          >
+          <Text style={[styles.tabLabel, activeTab === "rewards" && styles.tabLabelActive]}>
             Logros
           </Text>
         </Pressable>
@@ -110,8 +115,8 @@ const styles = StyleSheet.create({
   tabBar: {
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
     borderTopWidth: 1,
     borderTopColor: "#E0E0E0",
     shadowColor: "#000",
@@ -124,19 +129,19 @@ const styles = StyleSheet.create({
   tabItem: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 14,
   },
   tabItemActive: {
     backgroundColor: "#FFE082",
   },
   tabIcon: {
-    fontSize: 20,
-    marginBottom: 2,
+    fontSize: 18,
+    marginBottom: 1,
   },
   tabLabel: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "700",
     color: "#666666",
   },
