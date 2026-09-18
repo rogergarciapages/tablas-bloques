@@ -5,66 +5,73 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![License](https://img.shields.io/badge/Licencia-MIT-green?style=for-the-badge)
 
-Una aplicación divertida, visual e interactiva construida en **React Native / Expo**, creada especialmente para niños de 8 años para aprender y dominar las tablas de multiplicar a través de arreglos de bloques animados e inspirados en el universo visual de **Numberblocks**.
+Una aplicación divertida, moderna, visual e interactiva construida en **React Native / Expo**, creada especialmente para niños de 8 años para aprender, explorar y dominar las tablas de multiplicar a través de arreglos gráficos de bloques animados e inspirados en el universo visual de **Numberblocks**.
 
 ---
 
-## 🌟 Características Principales
+## 🌟 5 Pestañas y Secciones Principales
 
-- 🎨 **Explorador Visual de Tablas**:
-  - Explora las tablas del 1 al 12.
-  - Cada multiplicación ($2 \times 2, 2 \times 3, 3 \times 4\dots$) se representa mediante una cuadrícula visual de bloques amigables.
-  - Resaltado especial para **Cuadrados Perfectos** ($2 \times 2 = 4$, $3 \times 3 = 9$, $4 \times 4 = 16$, $5 \times 5 = 25$).
-  - Conteo táctil bloque por bloque con efectos de luz y sonidos pentatónicos.
+### 1. 🎨 Explorador Visual de Tablas (`ExplorerScreen`)
+- Selecciona cualquier tabla del 1 al 12 con colores característicos.
+- Cada multiplicación ($A \times B$) se representa mediante una cuadrícula visual de bloques amigables.
+- Destaca **Cuadrados Perfectos** ($2 \times 2 = 4$, $3 \times 3 = 9$, $4 \times 4 = 16$, $5 \times 5 = 25$).
+- Modo inspector con conteo táctil bloque por bloque y tonos de audio pentatónicos.
 
-- 🛠️ **Constructor de Cuadrados y Bloques (Modo Libre)**:
-  - Cambia las filas y columnas ($1 \dots 10$) en tiempo real.
-  - Detecta si el arreglo forma un **Rectángulo** o un **Cuadrado Perfecto**.
-  - **Ajuste Responsivo Automático**: La cuadrícula calcula la altura y ancho disponibles para que el 100% de la cuadrícula quepa en pantalla **sin ningún desplazamiento (scroll)** tanto en formato vertical como panorámico.
+### 2. 🛠️ Constructor Libre de Bloques (`BuilderScreen`)
+- Incrementa o decrementa Filas y Columnas ($1 \dots 10$) en tiempo real.
+- Detecta al instante si el arreglo forma un **Rectángulo** o un **Cuadrado Perfecto**.
+- **Adaptabilidad 100% Cero-Scroll**: Escala el tamaño de cada celda automáticamente considerando la altura y ancho disponibles del dispositivo, garantizando visión completa sin barras de desplazamiento.
 
-- 🍹 **Cóctel de Tablas / Mezcla (Novedad)**:
-  - **Detección de Movimiento (Shake)**: Al sacudir el móvil o pulsar el botón de mezclado, la multiplicación se parte en subcuadrados.
-  - Ejemplo para $10 \times 10 = 100$:
-    - Se descompone en **4 cuadrados de $5 \times 5$** ($25 + 25 + 25 + 25 = 100$).
-    - O en **$8 \times 8$ ($64$) + $6 \times 6$ ($36$) = $100$**.
-  - Enseña la propiedad distributiva de forma completamente visual.
+### 3. 🍹 Cóctel de Tablas / Mezcla (`MixScreen` - ¡Novedad!)
+- **Sensor de Sacudida (Motion Shake)**: Al sacudir el móvil (mediante acelerómetro en iOS/Android) o al presionar el botón *"🍹 ¡SACUDIR CÓCTEL!"*, el bloque se parte dinámicamente en sub-bloques más pequeños.
+- **Enseña la Propiedad Distributiva del Área**:
+  - Por ejemplo, **$10 \times 10 = 100$** al sacudir se descompone en:
+    - **4 Cuadrados de $5 \times 5$**: $(5\times5) + (5\times5) + (5\times5) + (5\times5) = 25 + 25 + 25 + 25 = 100$.
+    - **$8 \times 8$ + $6 \times 6$**: $(8\times8) + (6\times6) = 64 + 36 = 100$.
+    - **2 Bloques de $5 \times 10$**: $(5\times10) + (5\times10) = 50 + 50 = 100$.
 
-- 🎯 **Juego de Desafío y Práctica**:
-  - Minijuego con preguntas interactivas y opciones múltiples.
-  - Pista visual desplegable con la cuadrícula de bloques para ayudar a contar si se necesita apoyo.
-  - Contador de racha de aciertos (🔥), estrellas (⭐) y celebración con confeti de partículas.
+### 4. 🎯 Juego de Desafío y Práctica (`QuizScreen`)
+- Preguntas interactivas con apoyo visual toggleable de la cuadrícula de bloques.
+- Contador de racha de aciertos (🔥), estrellas acumulables (⭐), mensajes motivacionales y celebración con confeti brillante.
 
-- 🏆 **Álbum de Logros y Personajes Bloque**:
-  - Colección completa de avatares estilo Numberblocks (del 1 al 12) con sus esquemas de color, caritas, expresividad y frases motivacionales.
-
-- 🔊 **Motor de Audio Sintetizado (Web Audio API)**:
-  - Efectos sonoros *pop*, escala pentatónica de conteo y arpegios de victoria generados en tiempo real sin requerir descarga de archivos MP3 externos.
+### 5. 🏆 Álbum de Logros y Personajes (`RewardsScreen`)
+- Galería completa de personajes Bloque (del 1 al 12) con sus esquemas de color, caritas, expresividad, medallas y frases celebres.
 
 ---
 
-## 📁 Estructura del Proyecto
+## 🔊 Motor de Audio Sintetizado (Web Audio API)
+
+No requiere la descarga ni almacenamiento de archivos MP3 pesados:
+- **Efectos Pop**: Sonidos de burbuja al tocar cada bloque.
+- **Escala Pentatónica**: Tonos ascendentes al contar celdas secuencialmente.
+- **Acordes de Magia**: Acorde especial para números cuadrados.
+- **Arpegio de Victoria**: Melodía de celebración al acertar o completar un reto.
+
+---
+
+## 📁 Estructura del Código
 
 ```text
 Tablas/
-├── App.tsx                      # Componente raíz y navegación por 5 pestañas
+├── App.tsx                      # Navegación principal por 5 pestañas
 ├── src/
 │   ├── components/
-│   │   ├── NumberBlock.tsx      # Bloque individual estilo Numberblock con ojos y números
-│   │   ├── BlockGrid.tsx        # Renderizado responsivo de cuadrículas R x C
-│   │   ├── TableSelector.tsx    # Barra de selección de tablas (1 al 12)
-│   │   └── Confetti.tsx         # Animación de partículas para celebraciones
+│   │   ├── NumberBlock.tsx      # Bloque individual estilo Numberblock (ojos, boca, badge 100%)
+│   │   ├── BlockGrid.tsx        # Matriz responsiva adaptativa R x C sin desbordamiento
+│   │   ├── TableSelector.tsx    # Selector horizontal de tablas (1 al 12)
+│   │   └── Confetti.tsx         # Animación de partículas de victoria
 │   ├── screens/
-│   │   ├── ExplorerScreen.tsx   # Vista principal de exploración de multiplicaciones
-│   │   ├── BuilderScreen.tsx    # Modo libre constructor sin scroll
+│   │   ├── ExplorerScreen.tsx   # Vista de exploración de multiplicaciones
+│   │   ├── BuilderScreen.tsx    # Modo libre constructor dinámico
 │   │   ├── MixScreen.tsx        # Cóctel y partición de bloques con sensor Shake 🍹
-│   │   ├── QuizScreen.tsx       # Juego interactivo de preguntas y estrellas
+│   │   ├── QuizScreen.tsx       # Juego interactivo con racha y estrellas
 │   │   └── RewardsScreen.tsx    # Álbum de logros y personajes
 │   ├── theme/
-│   │   └── colors.ts            # Esquemas de color y lemas de Numberblocks (1 al 12)
+│   │   └── colors.ts            # Esquemas visuales y lemas de Numberblocks (1 al 12)
 │   └── utils/
 │       ├── soundEngine.ts       # Sintetizador de efectos de sonido Web Audio
-│       ├── shakeSensor.ts       # Detección de sacudida para Web y Móvil
-│       └── decompositions.ts    # Lógica matemática de partición de bloques
+│       ├── shakeSensor.ts       # Detección de sacudida para Web y Móvil (Shake API)
+│       └── decompositions.ts    # Lógica matemática de descomposiciones de área
 └── package.json
 ```
 
@@ -74,7 +81,7 @@ Tablas/
 
 ### Prerrequisitos
 
-Tener instalado [Node.js](https://nodejs.org/) (v18 o superior) en tu sistema.
+Tener instalado [Node.js](https://nodejs.org/) (v18 o superior).
 
 ### Instalación
 
@@ -89,22 +96,22 @@ Tener instalado [Node.js](https://nodejs.org/) (v18 o superior) en tu sistema.
    npm install --legacy-peer-deps
    ```
 
-### Ejecutar en Desarrollo
+### Ejecución
 
 - **En Navegador Web**:
   ```bash
   npm run web
   ```
-  Abre la aplicación de inmediato en `http://localhost:8081`.
+  Abre la aplicación automáticamente en `http://localhost:8081`.
 
-- **En Dispositivo Móvil / Tablet (Expo Go)**:
+- **En Dispositivo Móvil / Tablet (Expo Go para iOS y Android)**:
   ```bash
   npm run start
   ```
-  Escanea el código QR proyectado en la consola desde la aplicación **Expo Go** (disponible para iOS y Android).
+  Escanea el código QR desde la app **Expo Go**.
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia **MIT**. ¡Siéntete libre de compartirlo y adaptarlo! 🚀
+Este proyecto está bajo la Licencia **MIT**. ¡Siéntete libre de compartirlo y personalizarlo! 🚀
