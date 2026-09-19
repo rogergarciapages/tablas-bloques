@@ -12,6 +12,7 @@ import { BuilderScreen } from "./src/screens/BuilderScreen";
 import { MixScreen } from "./src/screens/MixScreen";
 import { QuizScreen } from "./src/screens/QuizScreen";
 import { RewardsScreen } from "./src/screens/RewardsScreen";
+import { BannerAd } from "./src/components/BannerAd";
 import { soundEngine } from "./src/utils/soundEngine";
 
 type TabName = "explorer" | "builder" | "mix" | "quiz" | "rewards";
@@ -47,6 +48,9 @@ export default function App() {
 
       {/* Main Screen Content */}
       <View style={styles.screenContainer}>{renderActiveScreen()}</View>
+
+      {/* Always-Present Non-Invasive Bottom Banner Ad */}
+      <BannerAd />
 
       {/* Bottom Navigation Tab Bar */}
       <View style={styles.tabBar}>
