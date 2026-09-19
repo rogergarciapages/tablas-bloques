@@ -153,6 +153,159 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       squareBanner: "⭐ PERFECT SQUARE FORMATION! ⭐",
     },
   },
+  pt: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "Tabuada",
+      builder: "Construtor",
+      mix: "Cócktail",
+      quiz: "Desafio",
+      rewards: "Conquistas",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: Explorador Visual 🌟",
+      selectPrompt: "Escolha uma Tabuada para Explorar 🎨",
+      tablePrefix: "Tabuada",
+      multHeader: "Tabuada de Multiplicação do",
+      rowsOf: "linhas de",
+      squareTag: "Quadrado!",
+      tapToCount: "👉 Toque para contar",
+      backBtn: "← Voltar",
+    },
+    builder: {
+      bannerTitle: "Construtor de Blocos 🛠️",
+      rowsLabel: "Linhas",
+      colsLabel: "Colunas",
+      squaresLabel: "Quadrados:",
+      squareStatus: "⭐ Quadrado:",
+      rectStatus: "📐 Retângulo:",
+    },
+    mix: {
+      bannerTitle: "Cócktail de Multiplicação 🍹",
+      subtitle: "Agite o dispositivo para dividir os blocos!",
+      shakeBtn: "🍹 AGITE PARA MISTURAR! 💥",
+    },
+    quiz: {
+      bannerTitle: "Jogo de Desafio 🎯",
+      starsBadge: "Estrelas",
+      streakBadge: "Sequência de acertos!",
+      questionPrompt: "Qual é o resultado de...?",
+      showHint: "💡 Mostrar Dica de Blocos",
+      hideHint: "👁️ Ocultar Dica de Blocos",
+    },
+    rewards: {
+      bannerTitle: "Conquistas e Personagens 🏆",
+      subtitle: "Conheça todos os personagens Bloco!",
+      masterTag: "⭐ ⭐ ⭐ Mestre da Tabuada",
+    },
+    grid: {
+      autoCount: "▶️ Contar Automático",
+      resetCount: "🔄 Reiniciar",
+      squareBanner: "⭐ FORMAÇÃO DE QUADRADO PERFEITO! ⭐",
+    },
+  },
+  ru: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "Таблицы",
+      builder: "Конструктор",
+      mix: "Микс",
+      quiz: "Викторина",
+      rewards: "Награды",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: Таблица Умножения 🌟",
+      selectPrompt: "Выберите таблицу для изучения 🎨",
+      tablePrefix: "Таблица",
+      multHeader: "Таблица умножения на",
+      rowsOf: "строк по",
+      squareTag: "Квадрат!",
+      tapToCount: "👉 Нажмите, чтобы посчитать",
+      backBtn: "← Назад",
+    },
+    builder: {
+      bannerTitle: "Конструктор Блоков 🛠️",
+      rowsLabel: "Строки",
+      colsLabel: "Столбцы",
+      squaresLabel: "Квадраты:",
+      squareStatus: "⭐ Квадрат:",
+      rectStatus: "📐 Прямоугольник:",
+    },
+    mix: {
+      bannerTitle: "Коктейль Умножения 🍹",
+      subtitle: "Встряхните устройство, чтобы разделить блоки!",
+      shakeBtn: "🍹 ВСТРЯХНИТЕ ДЛЯ МИКСА! 💥",
+    },
+    quiz: {
+      bannerTitle: "Математическая Викторина 🎯",
+      starsBadge: "Звезды",
+      streakBadge: "Серия побед!",
+      questionPrompt: "Какой ответ...?",
+      showHint: "💡 Показать подсказку",
+      hideHint: "👁️ Скрыть подсказку",
+    },
+    rewards: {
+      bannerTitle: "Награды и Персонажи 🏆",
+      subtitle: "Познакомьтесь со всеми персонажами!",
+      masterTag: "⭐ ⭐ ⭐ Мастер Таблицы",
+    },
+    grid: {
+      autoCount: "▶️ Автосчет",
+      resetCount: "🔄 Сброс",
+      squareBanner: "⭐ ИДЕАЛЬНЫЙ КВАДРАТ! ⭐",
+    },
+  },
+  ur: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "پہاڑے",
+      builder: "بلڈر",
+      mix: "مکس",
+      quiz: "چیلنج",
+      rewards: "انعامات",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: ضرب کے پہاڑے 🌟",
+      selectPrompt: "سیکھنے کے لیے پہاڑا منتخب کریں 🎨",
+      tablePrefix: "پہاڑا",
+      multHeader: "کا ضرب کا پہاڑا",
+      rowsOf: "قطاریں",
+      squareTag: "مربع!",
+      tapToCount: "👉 گننے کے لیے چھوئیں",
+      backBtn: "← واپس",
+    },
+    builder: {
+      bannerTitle: "بلاک بلڈر 🛠️",
+      rowsLabel: "قطاریں",
+      colsLabel: "کالم",
+      squaresLabel: "مربع:",
+      squareStatus: "⭐ مربع:",
+      rectStatus: "📐 مستطیل:",
+    },
+    mix: {
+      bannerTitle: "ضرب کا کاک ٹیل 🍹",
+      subtitle: "بلاک توڑنے کے لیے ڈیوائس کو ہلائیں!",
+      shakeBtn: "🍹 مکس کرنے کے لیے ہلائیں! 💥",
+    },
+    quiz: {
+      bannerTitle: "چیلنج گیم 🎯",
+      starsBadge: "ستارے",
+      streakBadge: "مسلسل درست جوابات!",
+      questionPrompt: "جواب کیا ہے...؟",
+      showHint: "💡 بلاک کا اشارہ دکھائیں",
+      hideHint: "👁️ اشارہ چھپائیں",
+    },
+    rewards: {
+      bannerTitle: "انعامات اور کردار 🏆",
+      subtitle: "تمام بلاک کرداروں سے ملیں!",
+      masterTag: "⭐ ⭐ ⭐ ماسٹر پہاڑا",
+    },
+    grid: {
+      autoCount: "▶️ آٹو گنتی",
+      resetCount: "🔄 ری سیٹ",
+      squareBanner: "⭐ مکمل مربع تشکیل! ⭐",
+    },
+  },
   hi: {
     appName: "BlockTables",
     tabs: {
@@ -258,11 +411,14 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 };
 
 // Auto-detect language helper
-export const getDeviceLanguage = (): "es" | "en" | "hi" | "tr" => {
+export const getDeviceLanguage = (): "es" | "en" | "pt" | "ru" | "ur" | "hi" | "tr" => {
   if (typeof window !== "undefined" && window.navigator) {
     const lang = (window.navigator.language || (window.navigator as any).userLanguage || "").toLowerCase();
     if (lang.startsWith("es")) return "es";
     if (lang.startsWith("en")) return "en";
+    if (lang.startsWith("pt")) return "pt";
+    if (lang.startsWith("ru")) return "ru";
+    if (lang.startsWith("ur")) return "ur";
     if (lang.startsWith("hi")) return "hi";
     if (lang.startsWith("tr")) return "tr";
   }
