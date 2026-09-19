@@ -613,7 +613,7 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
     },
   },
   ca: {
-    appName: "Taules Blocs",
+    appName: "BlockTables",
     tabs: {
       explorer: "Taules",
       builder: "Constructor",
@@ -622,7 +622,7 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       rewards: "Assoliments",
     },
     explorer: {
-      bannerTitle: "Explorador Visual de Taules 🌟",
+      bannerTitle: "BlockTables: Explorador Visual de Taules de Multiplicar 🌟",
       selectPrompt: "Tria una Taula per Explorar 🎨",
       tablePrefix: "Taula del",
       multHeader: "Multiplicacions de la Taula del",
