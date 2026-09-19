@@ -153,6 +153,159 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       squareBanner: "⭐ PERFECT SQUARE FORMATION! ⭐",
     },
   },
+  ar: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "الجداول",
+      builder: "المُنشئ",
+      mix: "الكوكتيل",
+      quiz: "التحدي",
+      rewards: "الإنجازات",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: مستكشف جدول الضرب 🌟",
+      selectPrompt: "اختر جدول ضرب للاستكشاف 🎨",
+      tablePrefix: "جدول",
+      multHeader: "جدول ضرب العدد",
+      rowsOf: "صفوف من",
+      squareTag: "مربع!",
+      tapToCount: "👉 انقر للعد",
+      backBtn: "← عودة",
+    },
+    builder: {
+      bannerTitle: "مُنشئ الكتل 🛠️",
+      rowsLabel: "الصفوف",
+      colsLabel: "الأعمدة",
+      squaresLabel: "مربعات:",
+      squareStatus: "⭐ مربع:",
+      rectStatus: "📐 مستطيل:",
+    },
+    mix: {
+      bannerTitle: "كوكتيل الضرب 🍹",
+      subtitle: "هز الجهاز لتقسيم الكتل وخفقها!",
+      shakeBtn: "🍹 هز لخلط كوكتيل الضرب! 💥",
+    },
+    quiz: {
+      bannerTitle: "لعبة التحدي 🎯",
+      starsBadge: "نجوم",
+      streakBadge: "سلسلة إجابات صحيحة!",
+      questionPrompt: "ما هي الإجابة الصحيحة...؟",
+      showHint: "💡 إظهار تلميح الكتل",
+      hideHint: "👁️ إخفاء التلميح",
+    },
+    rewards: {
+      bannerTitle: "الإنجازات والشخصيات 🏆",
+      subtitle: "تعرف على جميع شخصيات الكتل!",
+      masterTag: "⭐ ⭐ ⭐ خبير الجدول",
+    },
+    grid: {
+      autoCount: "▶️ عد تلقائي",
+      resetCount: "🔄 إعادة ضبط",
+      squareBanner: "⭐ تشكيل مربع مثالي! ⭐",
+    },
+  },
+  ko: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "구구단",
+      builder: "만들기",
+      mix: "믹스",
+      quiz: "퀴즈",
+      rewards: "뱃지",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: 시각 구구단 탐험 🌟",
+      selectPrompt: "학습할 구구단을 선택하세요 🎨",
+      tablePrefix: "단",
+      multHeader: "구구단:",
+      rowsOf: "줄의",
+      squareTag: "정사각형!",
+      tapToCount: "👉 눌러서 세어보기",
+      backBtn: "← 뒤로",
+    },
+    builder: {
+      bannerTitle: "블록 만들기 🛠️",
+      rowsLabel: "세로",
+      colsLabel: "가로",
+      squaresLabel: "정사각형:",
+      squareStatus: "⭐ 정사각형:",
+      rectStatus: "📐 직사각형:",
+    },
+    mix: {
+      bannerTitle: "구구단 칵테일 🍹",
+      subtitle: "기기를 흔들어 블록을 조각내세요!",
+      shakeBtn: "🍹 칵테일 믹스 쉐이크! 💥",
+    },
+    quiz: {
+      bannerTitle: "도전 퀴즈 게임 🎯",
+      starsBadge: "별",
+      streakBadge: "연속 정답!",
+      questionPrompt: "정답은 무엇일까요...?",
+      showHint: "💡 블록 힌트 보기",
+      hideHint: "👁️ 힌트 숨기기",
+    },
+    rewards: {
+      bannerTitle: "뱃지 및 캐릭터 🏆",
+      subtitle: "모든 블록 캐릭터를 만나보세요!",
+      masterTag: "⭐ ⭐ ⭐ 구구단 마스터",
+    },
+    grid: {
+      autoCount: "▶️ 자동 세기",
+      resetCount: "🔄 리셋",
+      squareBanner: "⭐ 완벽한 정사각형! ⭐",
+    },
+  },
+  ja: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "九九の表",
+      builder: "ビルダー",
+      mix: "ミックス",
+      quiz: "クイズ",
+      rewards: "バッジ",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: 楽しく学べる九九の表 🌟",
+      selectPrompt: "学習する段を選んでね 🎨",
+      tablePrefix: "の段",
+      multHeader: "九九の表:",
+      rowsOf: "行",
+      squareTag: "正方形！",
+      tapToCount: "👉 タップして数える",
+      backBtn: "← 戻る",
+    },
+    builder: {
+      bannerTitle: "ブロックビルダー 🛠️",
+      rowsLabel: "たて",
+      colsLabel: "よこ",
+      squaresLabel: "正方形:",
+      squareStatus: "⭐ 正方形:",
+      rectStatus: "📐 長方形:",
+    },
+    mix: {
+      bannerTitle: "かけ算カクテル 🍹",
+      subtitle: "端末を振ってブロックを分けてみよう！",
+      shakeBtn: "🍹 シェイクしてミックス！ 💥",
+    },
+    quiz: {
+      bannerTitle: "チャレンジクイズ 🎯",
+      starsBadge: "スター",
+      streakBadge: "連続正解！",
+      questionPrompt: "こたえはどれかな...？",
+      showHint: "💡 ヒントを表示",
+      hideHint: "👁️ ヒントを隠す",
+    },
+    rewards: {
+      bannerTitle: "バッジと cluster キャラ 🏆",
+      subtitle: "すべてのブロックキャラに会おう！",
+      masterTag: "⭐ ⭐ ⭐ 九九マスター",
+    },
+    grid: {
+      autoCount: "▶️ じどうで数える",
+      resetCount: "🔄 リセット",
+      squareBanner: "⭐ かんぺきな正方形！ ⭐",
+    },
+  },
   pt: {
     appName: "BlockTables",
     tabs: {
@@ -411,11 +564,14 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
 };
 
 // Auto-detect language helper
-export const getDeviceLanguage = (): "es" | "en" | "pt" | "ru" | "ur" | "hi" | "tr" => {
+export const getDeviceLanguage = (): "es" | "en" | "ar" | "ko" | "ja" | "pt" | "ru" | "ur" | "hi" | "tr" => {
   if (typeof window !== "undefined" && window.navigator) {
     const lang = (window.navigator.language || (window.navigator as any).userLanguage || "").toLowerCase();
     if (lang.startsWith("es")) return "es";
     if (lang.startsWith("en")) return "en";
+    if (lang.startsWith("ar")) return "ar";
+    if (lang.startsWith("ko")) return "ko";
+    if (lang.startsWith("ja")) return "ja";
     if (lang.startsWith("pt")) return "pt";
     if (lang.startsWith("ru")) return "ru";
     if (lang.startsWith("ur")) return "ur";
