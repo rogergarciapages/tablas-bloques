@@ -103,7 +103,7 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
     },
   },
   en: {
-    appName: "Block Tables",
+    appName: "BlockTables",
     tabs: {
       explorer: "Tables",
       builder: "Builder",
@@ -112,10 +112,10 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       rewards: "Badges",
     },
     explorer: {
-      bannerTitle: "Visual Multiplication Explorer 🌟",
-      selectPrompt: "Choose a Table to Explore 🎨",
+      bannerTitle: "BlockTables: Visual Explorer 🌟",
+      selectPrompt: "Choose a Times Table to Explore 🎨",
       tablePrefix: "Table",
-      multHeader: "Multiplications for Table of",
+      multHeader: "Multiplication Table for",
       rowsOf: "rows of",
       squareTag: "Square!",
       tapToCount: "👉 Tap to count",
@@ -135,7 +135,7 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       shakeBtn: "🍹 SHAKE MULTIPLICATION COCKTAIL! 💥",
     },
     quiz: {
-      bannerTitle: "Challenge Game 🎯",
+      bannerTitle: "Challenge Quiz 🎯",
       starsBadge: "Stars",
       streakBadge: "Streak boost!",
       questionPrompt: "What is the answer to...?",
@@ -143,7 +143,7 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       hideHint: "👁️ Hide Visual Block Hint",
     },
     rewards: {
-      bannerTitle: "Badges & Character Album 🏆",
+      bannerTitle: "Badges & Characters 🏆",
       subtitle: "Meet all the Block characters and their powers!",
       masterTag: "⭐ ⭐ ⭐ Master Table",
     },
@@ -153,14 +153,118 @@ export const TRANSLATIONS: Record<string, TranslationDictionary> = {
       squareBanner: "⭐ PERFECT SQUARE FORMATION! ⭐",
     },
   },
+  hi: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "पहाड़े",
+      builder: "बिल्डर",
+      mix: "मिश्रण",
+      quiz: "चुनौती",
+      rewards: "इनाम",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: पहाड़े सीखें 🌟",
+      selectPrompt: "सीखने के लिए पहाड़ा चुनें 🎨",
+      tablePrefix: "पहाड़ा",
+      multHeader: "का पहाड़ा (Multiplication Table)",
+      rowsOf: "पंक्तियां",
+      squareTag: "वर्ग!",
+      tapToCount: "👉 गिनने के लिए छुएं",
+      backBtn: "← वापस",
+    },
+    builder: {
+      bannerTitle: "ब्लॉक बिल्डर 🛠️",
+      rowsLabel: "पंक्तियां",
+      colsLabel: "स्तंभ",
+      squaresLabel: "वर्ग:",
+      squareStatus: "⭐ वर्ग:",
+      rectStatus: "📐 आयत:",
+    },
+    mix: {
+      bannerTitle: "गुणा कॉकटेल 🍹",
+      subtitle: "ब्लॉकों को तोड़ने के लिए मोबाइल हिलाएं!",
+      shakeBtn: "🍹 कॉकटेल मिक्स करने के लिए हिलाएं! 💥",
+    },
+    quiz: {
+      bannerTitle: "चुनौती गेम 🎯",
+      starsBadge: "सितारे",
+      streakBadge: "लगातार सही उत्तर!",
+      questionPrompt: "उत्तर क्या है...?",
+      showHint: "💡 ब्लॉक संकेत दिखाएं",
+      hideHint: "👁️ संकेत छुपाएं",
+    },
+    rewards: {
+      bannerTitle: "इनाम और ब्लॉक पात्र 🏆",
+      subtitle: "सभी ब्लॉक पात्रों से मिलें!",
+      masterTag: "⭐ ⭐ ⭐ मास्टर पहाड़ा",
+    },
+    grid: {
+      autoCount: "▶️ ऑटो गिनती",
+      resetCount: "🔄 रीसेट",
+      squareBanner: "⭐ पूर्ण वर्ग संरचना! ⭐",
+    },
+  },
+  tr: {
+    appName: "BlockTables",
+    tabs: {
+      explorer: "Tablolar",
+      builder: "Kurucu",
+      mix: "Karışım",
+      quiz: "Yarışma",
+      rewards: "Rozetler",
+    },
+    explorer: {
+      bannerTitle: "BlockTables: Görsel Çarpım Tablosu 🌟",
+      selectPrompt: "Öğrenmek için Bir Tablo Seçin 🎨",
+      tablePrefix: "Tablo",
+      multHeader: "Çarpım Tablosu:",
+      rowsOf: "satır",
+      squareTag: "Kare!",
+      tapToCount: "👉 Saymak için dokunun",
+      backBtn: "← Geri",
+    },
+    builder: {
+      bannerTitle: "Blok Kurucu 🛠️",
+      rowsLabel: "Satırlar",
+      colsLabel: "Sütunlar",
+      squaresLabel: "Kareler:",
+      squareStatus: "⭐ Kare:",
+      rectStatus: "📐 Dikdörtgen:",
+    },
+    mix: {
+      bannerTitle: "Çarpım Kokteyli 🍹",
+      subtitle: "Blokları bölmek için cihazınızı sallayın!",
+      shakeBtn: "🍹 KARIŞTIRMAK İÇİN SALLAYIN! 💥",
+    },
+    quiz: {
+      bannerTitle: "Yarışma Oyunu 🎯",
+      starsBadge: "Yıldızlar",
+      streakBadge: "Galibiyet serisi!",
+      questionPrompt: "İşlemin sonucu nedir...?",
+      showHint: "💡 Görsel İpucunu Göster",
+      hideHint: "👁️ İpucunu Gizle",
+    },
+    rewards: {
+      bannerTitle: "Rozetler ve Karakterler 🏆",
+      subtitle: "Tüm Blok karakterleriyle tanışın!",
+      masterTag: "⭐ ⭐ ⭐ Usta Tablo",
+    },
+    grid: {
+      autoCount: "▶️ Otomatik Say",
+      resetCount: "🔄 Sıfırla",
+      squareBanner: "⭐ MÜKEMMEL KARE FORMU! ⭐",
+    },
+  },
 };
 
 // Auto-detect language helper
-export const getDeviceLanguage = (): "es" | "en" => {
+export const getDeviceLanguage = (): "es" | "en" | "hi" | "tr" => {
   if (typeof window !== "undefined" && window.navigator) {
-    const lang = window.navigator.language || (window.navigator as any).userLanguage || "";
-    if (lang.toLowerCase().startsWith("es")) return "es";
-    if (lang.toLowerCase().startsWith("en")) return "en";
+    const lang = (window.navigator.language || (window.navigator as any).userLanguage || "").toLowerCase();
+    if (lang.startsWith("es")) return "es";
+    if (lang.startsWith("en")) return "en";
+    if (lang.startsWith("hi")) return "hi";
+    if (lang.startsWith("tr")) return "tr";
   }
   return "es";
 };
