@@ -15,7 +15,8 @@
         "foregroundImage": "./assets/adaptive-icon.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.wirelessroger.Tablas"
+      "package": "com.wirelessroger.blocktables",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/icon.png"
