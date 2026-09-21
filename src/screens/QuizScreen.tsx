@@ -107,9 +107,9 @@ export const QuizScreen: React.FC = () => {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
         {/* Banner Header */}
-        <View style={[styles.headerBanner, { backgroundColor: theme.primary }]}>
+        <View style={styles.headerBanner}>
           <View style={styles.headerRow}>
-            <Text style={styles.headerTitle}>Juego de Desafío 🎯</Text>
+            <Text style={styles.headerTitle}>Desafío de Tablas 🎯</Text>
             <View style={styles.starsBadge}>
               <Text style={styles.starsBadgeText}>⭐ {stars} Estrellas</Text>
             </View>
@@ -129,7 +129,7 @@ export const QuizScreen: React.FC = () => {
         <View style={styles.questionCard}>
           <Text style={styles.questionSubtitle}>¿Cuál es el resultado de...?</Text>
           <View style={styles.questionMainBox}>
-            <Text style={[styles.questionEquation, { color: theme.darkAccent }]}>
+            <Text style={[styles.questionEquation, { color: theme.primary }]}>
               {question.rows} × {question.cols} = ?
             </Text>
           </View>
@@ -146,13 +146,13 @@ export const QuizScreen: React.FC = () => {
           <View
             style={[
               styles.feedbackBanner,
-              { backgroundColor: feedback.type === "success" ? "#D4EDDA" : "#F8D7DA" },
+              { backgroundColor: feedback.type === "success" ? "rgba(16, 185, 129, 0.25)" : "rgba(239, 68, 68, 0.25)", borderColor: feedback.type === "success" ? "#10B981" : "#EF4444" },
             ]}
           >
             <Text
               style={[
                 styles.feedbackText,
-                { color: feedback.type === "success" ? "#155724" : "#721C24" },
+                { color: feedback.type === "success" ? "#34D399" : "#F87171" },
               ]}
             >
               {feedback.message}
@@ -168,13 +168,12 @@ export const QuizScreen: React.FC = () => {
               style={[
                 styles.optionBtn,
                 {
-                  backgroundColor: theme.lightAccent,
                   borderColor: theme.primary,
                 },
               ]}
               onPress={() => handleSelectOption(opt)}
             >
-              <Text style={[styles.optionText, { color: theme.darkAccent }]}>{opt}</Text>
+              <Text style={[styles.optionText, { color: "#FFFFFF" }]}>{opt}</Text>
             </Pressable>
           ))}
         </View>
@@ -213,18 +212,20 @@ export const QuizScreen: React.FC = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F5F7FA",
+    backgroundColor: "#090A1C",
   },
   container: {
     paddingBottom: 40,
     alignItems: "center",
+    backgroundColor: "#090A1C",
   },
   headerBanner: {
     width: "100%",
     paddingHorizontal: 20,
     paddingVertical: 14,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    backgroundColor: "#10122B",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "rgba(99, 102, 241, 0.3)",
     marginBottom: 10,
   },
   headerRow: {
@@ -233,23 +234,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
-    color: "#FFFFFF",
+    color: "#FFD700",
     fontSize: 22,
     fontWeight: "900",
   },
   starsBadge: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(99, 102, 241, 0.25)",
+    borderWidth: 1.5,
+    borderColor: "#6366F1",
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 16,
   },
   starsBadgeText: {
-    color: "#FFFFFF",
+    color: "#FFD700",
     fontWeight: "900",
     fontSize: 14,
   },
   streakBadge: {
-    backgroundColor: "#FFD700",
+    backgroundColor: "rgba(249, 115, 22, 0.25)",
+    borderWidth: 1,
+    borderColor: "#F97316",
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
@@ -257,26 +262,28 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   streakBadgeText: {
-    color: "#5C4000",
+    color: "#F97316",
     fontWeight: "800",
     fontSize: 12,
   },
   questionCard: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#121433",
     width: "90%",
     borderRadius: 20,
     padding: 16,
     alignItems: "center",
     marginVertical: 10,
-    shadowColor: "#000",
+    borderWidth: 1.5,
+    borderColor: "rgba(99, 102, 241, 0.35)",
+    shadowColor: "#6366F1",
     shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
     elevation: 4,
   },
   questionSubtitle: {
     fontSize: 14,
-    color: "#666666",
+    color: "#8E90B4",
     fontWeight: "700",
   },
   questionMainBox: {
@@ -287,26 +294,29 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
   squareHintBadge: {
-    backgroundColor: "#FFF9C4",
+    backgroundColor: "rgba(255, 215, 0, 0.2)",
+    borderColor: "#FFD700",
+    borderWidth: 1,
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 10,
   },
   squareHintText: {
-    color: "#856404",
+    color: "#FFD700",
     fontWeight: "800",
     fontSize: 12,
   },
   feedbackBanner: {
     width: "90%",
-    padding: 10,
+    padding: 12,
     borderRadius: 14,
+    borderWidth: 1.5,
     marginBottom: 10,
     alignItems: "center",
   },
   feedbackText: {
     fontSize: 14,
-    fontWeight: "800",
+    fontWeight: "900",
     textAlign: "center",
   },
   optionsGrid: {
@@ -320,14 +330,15 @@ const styles = StyleSheet.create({
   optionBtn: {
     width: "47%",
     paddingVertical: 18,
-    borderRadius: 18,
-    borderWidth: 2.5,
+    borderRadius: 20,
+    borderWidth: 2,
+    backgroundColor: "#16183B",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
+    shadowColor: "#6366F1",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
     elevation: 3,
   },
   optionText: {
@@ -335,15 +346,17 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
   hintToggleBtn: {
-    backgroundColor: "#E0F7FA",
+    backgroundColor: "#121433",
+    borderWidth: 1.5,
+    borderColor: "#06B6D4",
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 20,
     marginVertical: 10,
   },
   hintToggleText: {
-    color: "#00838F",
-    fontWeight: "800",
+    color: "#06B6D4",
+    fontWeight: "900",
     fontSize: 13,
   },
   hintGridWrapper: {

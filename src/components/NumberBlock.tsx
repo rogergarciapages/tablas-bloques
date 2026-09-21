@@ -26,9 +26,7 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
   const theme = getThemeForNumber(number);
   const [scale] = useState(new Animated.Value(1));
 
-  // The sequential number displayed on this block (1, 2, 3... total)
   const displayNum = countIndex !== undefined ? countIndex + 1 : number;
-
   const isThreeDigits = displayNum >= 100;
   const isTwoDigits = displayNum >= 10 && displayNum < 100;
 
@@ -54,21 +52,20 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
     }
   };
 
-  // Responsive sizing calculations
-  const eyeSize = Math.max(5, Math.floor(size * 0.16));
+  const eyeSize = Math.max(5, Math.floor(size * 0.17));
   const pupilSize = Math.max(2, Math.floor(eyeSize * 0.45));
 
   const badgeSizeWidth = isThreeDigits
     ? Math.max(20, Math.floor(size * 0.74))
-    : Math.max(16, Math.floor(size * 0.58));
+    : Math.max(16, Math.floor(size * 0.62));
 
-  const badgeSizeHeight = Math.max(16, Math.floor(size * 0.58));
+  const badgeSizeHeight = Math.max(16, Math.floor(size * 0.62));
 
   const fontSize = isThreeDigits
     ? Math.max(8, Math.floor(size * 0.26))
     : isTwoDigits
-    ? Math.max(9, Math.floor(size * 0.31))
-    : Math.max(10, Math.floor(size * 0.36));
+    ? Math.max(9, Math.floor(size * 0.32))
+    : Math.max(11, Math.floor(size * 0.42));
 
   return (
     <Pressable onPress={handlePress}>
@@ -80,20 +77,26 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
             height: size,
             backgroundColor: isCounted ? "#FFD700" : theme.primary,
             borderColor: isCounted
-              ? "#FF9500"
+              ? "#FFE082"
               : highlightSquare
-              ? "#FFD700"
-              : theme.darkAccent,
-            borderWidth: isCounted || highlightSquare ? 2 : 1,
+              ? theme.glowColor || "#38BDF8"
+              : "rgba(255, 255, 255, 0.25)",
             transform: [{ scale }],
+          },
+          (isCounted || highlightSquare) && {
+            shadowColor: isCounted ? "#FFD700" : theme.glowColor || "#38BDF8",
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.9,
+            shadowRadius: 8,
+            elevation: 8,
           },
         ]}
       >
-        {/* Top Shine Highlight */}
-        <View style={[styles.shine, { width: size * 0.7, height: size * 0.16 }]} />
+        {/* Top Glossy Curved Shine Highlight */}
+        <View style={[styles.shine, { width: size * 0.76, height: size * 0.2 }]} />
 
-        {/* Small Cute Face at the Top if block size is sufficient */}
-        {showFace && size >= 30 && (
+        {/* Small Cute Face at the Top */}
+        {showFace && size >= 28 && (
           <View style={styles.faceContainer}>
             <View style={styles.eyesRow}>
               {theme.eyesCount === 1 ? (
@@ -122,8 +125,8 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
               width: badgeSizeWidth,
               height: badgeSizeHeight,
               borderRadius: badgeSizeHeight / 2,
-              backgroundColor: isCounted ? "#FF3B30" : "#FFFFFF",
-              borderColor: isCounted ? "#FFFFFF" : theme.darkAccent,
+              backgroundColor: isCounted ? "#EF4444" : "#FFFFFF",
+              borderColor: isCounted ? "#FFFFFF" : "rgba(0, 0, 0, 0.15)",
             },
           ]}
         >
@@ -132,7 +135,7 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
               styles.numberText,
               {
                 fontSize,
-                color: isCounted ? "#FFFFFF" : "#1A1A1A",
+                color: isCounted ? "#FFFFFF" : "#0F172A",
               },
             ]}
           >
@@ -140,10 +143,10 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
           </Text>
         </View>
 
-        {/* Star glow when counted */}
+        {/* Star / Sparkle overlay when counted or square */}
         {isCounted && (
           <View style={styles.starOverlay}>
-            <Text style={{ fontSize: Math.max(7, Math.floor(size * 0.2)) }}>⭐</Text>
+            <Text style={{ fontSize: Math.max(7, Math.floor(size * 0.22)) }}>⭐</Text>
           </View>
         )}
       </Animated.View>
@@ -153,53 +156,55 @@ export const NumberBlock: React.FC<NumberBlockProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 6,
+    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
     overflow: "hidden",
-    margin: 1,
+    margin: 1.5,
+    borderWidth: 1.5,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.12,
-    shadowRadius: 1.5,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 4,
   },
   shine: {
     position: "absolute",
-    top: 1.5,
-    backgroundColor: "rgba(255, 255, 255, 0.45)",
-    borderRadius: 3,
+    top: 2,
+    backgroundColor: "rgba(255, 255, 255, 0.35)",
+    borderRadius: 4,
   },
   faceContainer: {
     position: "absolute",
-    top: 2,
+    top: 3,
     alignItems: "center",
   },
   eyesRow: {
     flexDirection: "row",
-    gap: 1.5,
+    gap: 2,
     alignItems: "center",
   },
   eye: {
     backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 0.8,
-    borderColor: "#222222",
+    borderWidth: 1,
+    borderColor: "#0F172A",
   },
   pupil: {
-    backgroundColor: "#111111",
+    backgroundColor: "#0F172A",
   },
   numberBadge: {
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1.2,
+    borderWidth: 1,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.15,
-    shadowRadius: 1,
-    elevation: 1,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.5,
+    elevation: 2,
+    marginTop: 2,
   },
   numberText: {
     fontWeight: "900",
@@ -208,7 +213,7 @@ const styles = StyleSheet.create({
   },
   starOverlay: {
     position: "absolute",
-    top: 0.5,
-    right: 1,
+    top: 1,
+    right: 2,
   },
 });

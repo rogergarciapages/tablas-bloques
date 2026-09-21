@@ -15,19 +15,21 @@ import { soundEngine } from "../utils/soundEngine";
 import { Confetti } from "../components/Confetti";
 
 export const ExplorerScreen: React.FC = () => {
-  const [selectedTable, setSelectedTable] = useState<number>(2); // Default to table of 2
-  const [activeModalMultiplier, setActiveModalMultiplier] = useState<number | null>(null);
+  const [selectedTable, setSelectedTable] = useState<number>(4); // Default to table of 4 as in Screenshot 1!
+  const [selectedMultiplier, setSelectedMultiplier] = useState<number>(4);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
   const theme = getThemeForNumber(selectedTable);
+  const totalResult = selectedTable * selectedMultiplier;
 
-  const handleOpenDetail = (mult: number) => {
+  const handleNextChallenge = () => {
     soundEngine.playPop(1.2);
-    setActiveModalMultiplier(mult);
-  };
-
-  const handleCloseDetail = () => {
-    setActiveModalMultiplier(null);
+    if (selectedMultiplier < 10) {
+      setSelectedMultiplier((prev) => prev + 1);
+    } else {
+      setSelectedMultiplier(1);
+      setSelectedTable((prev) => (prev % 12) + 1);
+    }
   };
 
   const handleCompleteCount = () => {
@@ -38,113 +40,59 @@ export const ExplorerScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Banner Header */}
-        <View style={[styles.headerBanner, { backgroundColor: theme.primary }]}>
-          <Text style={styles.headerTitle}>Explorador Visual de Tablas 🌟</Text>
-          <Text style={styles.headerSubtitle}>
-            {theme.name}: "{theme.motto}"
-          </Text>
+        {/* Top Header Bar matching Screenshot 1 */}
+        <View style={styles.headerBar}>
+          <Pressable style={styles.navPillBtn}>
+            <Text style={styles.navPillIcon}>‹</Text>
+          </Pressable>
+
+          <View style={styles.titleWrapper}>
+            <Text style={styles.titleMascot}>🧩</Text>
+            <View>
+              <Text style={styles.headerTitle}>EXPLORADOR</Text>
+              <Text style={styles.headerSubtitle}>DE TABLAS</Text>
+            </View>
+          </View>
+
+          <Pressable style={styles.navPillBtn}>
+            <Text style={styles.navPillHelp}>?</Text>
+          </Pressable>
         </View>
 
-        {/* Table Selector bar */}
+        {/* 2-Row Table Selector Pills */}
         <TableSelector selectedTable={selectedTable} onSelectTable={setSelectedTable} />
 
-        {/* Multiplications Cards List */}
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-          <Text style={styles.sectionHeader}>
-            Multiplicaciones de la Tabla del {selectedTable}:
+        {/* Central High-Impact Interactive Matrix */}
+        <View style={styles.matrixWrapper}>
+          <BlockGrid
+            rows={selectedTable}
+            cols={selectedMultiplier}
+            tableNumber={selectedTable}
+            interactiveCount={true}
+            onCompleteCount={handleCompleteCount}
+            showEquationCard={false}
+            maxHeightOverhead={230}
+          />
+        </View>
+
+        {/* Footer Result Banner & Actions matching Screenshot 1 */}
+        <View style={styles.footerContainer}>
+          <Text style={styles.resultBannerText}>
+            ¡MULTIPLICA: {selectedTable} X {selectedMultiplier} = {totalResult}!
           </Text>
 
-          <View style={styles.cardsGrid}>
-            {Array.from({ length: 10 }).map((_, idx) => {
-              const multiplier = idx + 1;
-              const result = selectedTable * multiplier;
-              const isSquare = selectedTable === multiplier;
+          <View style={styles.footerButtonsRow}>
+            <Pressable style={styles.primaryNextBtn} onPress={handleNextChallenge}>
+              <Text style={styles.primaryNextText}>SIGUIENTE RETO</Text>
+            </Pressable>
 
-              return (
-                <Pressable
-                  key={`mult-card-${multiplier}`}
-                  style={[
-                    styles.multCard,
-                    {
-                      backgroundColor: isSquare ? "#FFF9C4" : "#FFFFFF",
-                      borderColor: isSquare ? "#FFD700" : theme.primary,
-                      borderWidth: isSquare ? 3 : 2,
-                    },
-                  ]}
-                  onPress={() => handleOpenDetail(multiplier)}
-                >
-                  <View style={styles.cardHeader}>
-                    <Text style={[styles.cardEquation, { color: theme.darkAccent }]}>
-                      {selectedTable} × {multiplier}
-                    </Text>
-                    <View style={[styles.cardResultBadge, { backgroundColor: theme.primary }]}>
-                      <Text style={styles.cardResultText}>{result}</Text>
-                    </View>
-                  </View>
-
-                  <Text style={styles.cardDetailSubtext}>
-                    {selectedTable} filas de {multiplier} bloques
-                  </Text>
-
-                  {/* Mini Visual Preview */}
-                  <View style={styles.miniPreviewRow}>
-                    {Array.from({ length: Math.min(selectedTable, 4) }).map((_, r) => (
-                      <View key={`mini-r-${r}`} style={styles.miniRow}>
-                        {Array.from({ length: Math.min(multiplier, 5) }).map((_, c) => (
-                          <View
-                            key={`mini-c-${c}`}
-                            style={[styles.miniDot, { backgroundColor: theme.primary }]}
-                          />
-                        ))}
-                      </View>
-                    ))}
-                    {(selectedTable > 4 || multiplier > 5) && (
-                      <Text style={styles.miniMoreText}>+ bloques</Text>
-                    )}
-                  </View>
-
-                  {isSquare && (
-                    <View style={styles.squareTag}>
-                      <Text style={styles.squareTagText}>⭐ ¡Cuadrado! ({selectedTable}×{multiplier})</Text>
-                    </View>
-                  )}
-
-                  <Text style={styles.tapToExploreText}>👉 Toca para contar</Text>
-                </Pressable>
-              );
-            })}
+            <Pressable style={styles.secondaryLessonBtn} onPress={() => soundEngine.playPop(1.0)}>
+              <Text style={styles.secondaryLessonText}>LECCIÓN</Text>
+            </Pressable>
           </View>
-        </ScrollView>
+        </View>
 
-        {/* Modal Inspector for Full Screen Interactive Grid */}
-        {activeModalMultiplier !== null && (
-          <Modal animationType="slide" transparent={false} visible={true} onRequestClose={handleCloseDetail}>
-            <SafeAreaView style={[styles.modalSafeArea, { backgroundColor: theme.lightAccent }]}>
-              <View style={styles.modalHeader}>
-                <Pressable style={styles.closeBtn} onPress={handleCloseDetail}>
-                  <Text style={styles.closeBtnText}>← Volver</Text>
-                </Pressable>
-
-                <Text style={[styles.modalTitle, { color: theme.darkAccent }]}>
-                  {selectedTable} × {activeModalMultiplier}
-                </Text>
-              </View>
-
-              <View style={styles.modalContentWrapper}>
-                <BlockGrid
-                  rows={selectedTable}
-                  cols={activeModalMultiplier}
-                  tableNumber={selectedTable}
-                  interactiveCount={true}
-                  onCompleteCount={handleCompleteCount}
-                />
-              </View>
-
-              <Confetti active={showConfetti} />
-            </SafeAreaView>
-          </Modal>
-        )}
+        <Confetti active={showConfetti} />
       </View>
     </SafeAreaView>
   );
@@ -153,150 +101,124 @@ export const ExplorerScreen: React.FC = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F5F7FA",
+    backgroundColor: "#090A1C",
   },
   container: {
     flex: 1,
-  },
-  headerBanner: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
-  },
-  headerTitle: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "900",
-  },
-  headerSubtitle: {
-    color: "rgba(255, 255, 255, 0.9)",
-    fontSize: 12,
-    fontWeight: "600",
-    marginTop: 2,
-  },
-  sectionHeader: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: "#333333",
-    marginHorizontal: 16,
-    marginVertical: 8,
-  },
-  scrollContent: {
-    paddingBottom: 24,
-  },
-  cardsGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    paddingHorizontal: 12,
+    backgroundColor: "#090A1C",
     justifyContent: "space-between",
   },
-  multCard: {
-    width: "48%",
-    borderRadius: 16,
-    padding: 12,
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  cardHeader: {
+  headerBar: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    alignItems: "center",
-  },
-  cardEquation: {
-    fontSize: 17,
-    fontWeight: "900",
-  },
-  cardResultBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 10,
-  },
-  cardResultText: {
-    color: "#FFFFFF",
-    fontSize: 15,
-    fontWeight: "900",
-  },
-  cardDetailSubtext: {
-    fontSize: 11,
-    color: "#666666",
-    fontWeight: "600",
-    marginTop: 3,
-  },
-  miniPreviewRow: {
-    marginVertical: 6,
-    alignItems: "flex-start",
-    gap: 2,
-  },
-  miniRow: {
-    flexDirection: "row",
-    gap: 2,
-  },
-  miniDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 2,
-  },
-  miniMoreText: {
-    fontSize: 9,
-    color: "#888888",
-    fontStyle: "italic",
-    marginTop: 1,
-  },
-  squareTag: {
-    backgroundColor: "#FFD700",
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 6,
-    alignSelf: "flex-start",
-    marginBottom: 4,
-  },
-  squareTagText: {
-    fontSize: 10,
-    fontWeight: "900",
-    color: "#5C4000",
-  },
-  tapToExploreText: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#2196F3",
-    marginTop: 2,
-  },
-  modalSafeArea: {
-    flex: 1,
-  },
-  modalHeader: {
-    flexDirection: "row",
-    alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(0, 0, 0, 0.1)",
   },
-  closeBtn: {
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 14,
-  },
-  closeBtnText: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: "#333333",
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "900",
-    marginLeft: 14,
-  },
-  modalContentWrapper: {
-    flex: 1,
+  navPillBtn: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: "#16183B",
+    borderWidth: 1.5,
+    borderColor: "rgba(99, 102, 241, 0.3)",
     alignItems: "center",
     justifyContent: "center",
-    padding: 10,
+  },
+  navPillIcon: {
+    color: "#C7C9ED",
+    fontSize: 22,
+    fontWeight: "900",
+    marginTop: -2,
+  },
+  navPillHelp: {
+    color: "#C7C9ED",
+    fontSize: 16,
+    fontWeight: "900",
+  },
+  titleWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  titleMascot: {
+    fontSize: 24,
+  },
+  headerTitle: {
+    color: "#FFD700",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 0.5,
+    textAlign: "center",
+    textShadowColor: "rgba(255, 215, 0, 0.5)",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 6,
+  },
+  headerSubtitle: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 0.5,
+    textAlign: "center",
+  },
+  matrixWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 8,
+  },
+  footerContainer: {
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 16,
+    gap: 12,
+  },
+  resultBannerText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "900",
+    textAlign: "center",
+    textShadowColor: "#3B82F6",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
+  },
+  footerButtonsRow: {
+    flexDirection: "row",
+    gap: 14,
+    width: "100%",
+    justifyContent: "center",
+  },
+  primaryNextBtn: {
+    backgroundColor: "#2563EB",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 24,
+    borderWidth: 2,
+    borderColor: "#60A5FA",
+    shadowColor: "#3B82F6",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+    elevation: 8,
+  },
+  primaryNextText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 0.5,
+  },
+  secondaryLessonBtn: {
+    backgroundColor: "#16183B",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 24,
+    borderWidth: 1.5,
+    borderColor: "rgba(99, 102, 241, 0.4)",
+  },
+  secondaryLessonText: {
+    color: "#8E90B4",
+    fontSize: 14,
+    fontWeight: "900",
+    letterSpacing: 0.5,
   },
 });

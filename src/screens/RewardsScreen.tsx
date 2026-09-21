@@ -36,7 +36,7 @@ export const RewardsScreen: React.FC = () => {
               key={`rewards-char-${char.number}`}
               style={[
                 styles.charCard,
-                { backgroundColor: char.lightAccent, borderColor: char.primary },
+                { borderColor: char.primary, shadowColor: char.primary },
               ]}
               onPress={() => handlePressCharacter(char.number)}
             >
@@ -53,7 +53,7 @@ export const RewardsScreen: React.FC = () => {
               {/* Character Specs */}
               <View style={styles.charInfo}>
                 <View style={styles.charHeaderRow}>
-                  <Text style={[styles.charName, { color: char.darkAccent }]}>
+                  <Text style={[styles.charName, { color: char.primary }]}>
                     {char.name} ({char.number})
                   </Text>
                   {char.isSquare && (
@@ -81,28 +81,29 @@ export const RewardsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F5F7FA",
+    backgroundColor: "#090A1C",
   },
   container: {
     paddingBottom: 40,
     alignItems: "center",
+    backgroundColor: "#090A1C",
   },
   headerBanner: {
-    backgroundColor: "#AF52DE",
+    backgroundColor: "#10122B",
     width: "100%",
     paddingHorizontal: 20,
     paddingVertical: 14,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "rgba(99, 102, 241, 0.3)",
     marginBottom: 12,
   },
   headerTitle: {
-    color: "#FFFFFF",
+    color: "#FFD700",
     fontSize: 22,
     fontWeight: "900",
   },
   headerSubtitle: {
-    color: "rgba(255, 255, 255, 0.95)",
+    color: "#8E90B4",
     fontSize: 13,
     fontWeight: "600",
     marginTop: 2,
@@ -114,15 +115,15 @@ const styles = StyleSheet.create({
   charCard: {
     borderRadius: 20,
     padding: 14,
-    borderWidth: 2.5,
+    borderWidth: 2,
+    backgroundColor: "#121433",
     flexDirection: "row",
     alignItems: "center",
     gap: 14,
-    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
   },
   avatarContainer: {
     alignItems: "center",
@@ -141,7 +142,9 @@ const styles = StyleSheet.create({
     fontWeight: "900",
   },
   squareTag: {
-    backgroundColor: "#FFD700",
+    backgroundColor: "rgba(255, 215, 0, 0.2)",
+    borderColor: "#FFD700",
+    borderWidth: 1,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 8,
@@ -149,12 +152,12 @@ const styles = StyleSheet.create({
   squareTagText: {
     fontSize: 10,
     fontWeight: "900",
-    color: "#5C4000",
+    color: "#FFD700",
   },
   charMotto: {
     fontSize: 12,
     fontStyle: "italic",
-    color: "#444444",
+    color: "#8E90B4",
     marginTop: 4,
   },
   starsRow: {
@@ -163,6 +166,6 @@ const styles = StyleSheet.create({
   starsText: {
     fontSize: 12,
     fontWeight: "800",
-    color: "#FF9500",
+    color: "#FFD700",
   },
 });

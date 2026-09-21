@@ -19,6 +19,7 @@ export const MixScreen: React.FC = () => {
   const { width } = useWindowDimensions();
   const [targetKey, setTargetKey] = useState<string>("10x10");
   const [recipeIndex, setRecipeIndex] = useState<number>(0);
+  const [score, setScore] = useState<number>(2450);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const [shakeAnim] = useState(new Animated.Value(0));
 
@@ -26,23 +27,19 @@ export const MixScreen: React.FC = () => {
   const recipes = getDecompositions(rows, cols);
   const currentRecipe: DecompositionRecipe = recipes[recipeIndex % recipes.length];
 
-  // Motion Shake listener (Web devicemotion & Native mobile)
   useEffect(() => {
     const unsubscribe = shakeManager.subscribe(() => {
       triggerShakeMix();
     });
-
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, [recipeIndex, targetKey]);
 
   const triggerShakeMix = () => {
     soundEngine.playSquareMagic();
     setShowConfetti(true);
+    setScore((prev) => prev + 150);
     setTimeout(() => setShowConfetti(false), 2000);
 
-    // Shake animation effect
     Animated.sequence([
       Animated.timing(shakeAnim, { toValue: 15, duration: 60, useNativeDriver: true }),
       Animated.timing(shakeAnim, { toValue: -15, duration: 60, useNativeDriver: true }),
@@ -54,90 +51,105 @@ export const MixScreen: React.FC = () => {
     setRecipeIndex((prev) => prev + 1);
   };
 
+  const subColors = ["#06B6D4", "#10B981", "#F97316", "#EC4899"];
+  const badges = ["BOOM!", "ZAP!", "¡Genial!", "BOOM!"];
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Banner Header */}
-        <View style={[styles.headerBanner, { backgroundColor: "#FF2D55" }]}>
-          <Text style={styles.headerTitle}>Cóctel de Tablas 🍹</Text>
-          <Text style={styles.headerSubtitle}>
-            ¡Sacude el móvil o presiona para partir y mezclar bloques!
-          </Text>
+        {/* Top Header matching Screenshot 2 */}
+        <View style={styles.headerRow}>
+          <Text style={styles.soundIcon}>🔊</Text>
+          <Text style={styles.titleText}>Cóctel <Text style={{ color: "#06B6D4" }}>de Tablas</Text></Text>
+          <Text style={styles.gearIcon}>⚙️</Text>
         </View>
 
-        {/* Target Multiplication Selection Bar */}
-        <View style={styles.targetSelectorRow}>
-          {["10x10", "8x8", "6x6", "4x4"].map((key) => {
-            const [r, c] = key.split("x").map(Number);
-            const isSelected = targetKey === key;
+        {/* Score & Time Badges matching Screenshot 2 */}
+        <View style={styles.statsRow}>
+          <View style={styles.scorePill}>
+            <Text style={styles.statLabel}>Score</Text>
+            <Text style={styles.statValueCyan}>{score} <Text style={styles.statUnit}>pts</Text></Text>
+          </View>
 
-            return (
-              <Pressable
-                key={`mix-target-${key}`}
-                style={[
-                  styles.targetChip,
-                  isSelected && styles.targetChipActive,
-                ]}
-                onPress={() => {
-                  soundEngine.playPop(1.1);
-                  setTargetKey(key);
-                  setRecipeIndex(0);
-                }}
-              >
-                <Text
+          <View style={styles.timePill}>
+            <Text style={styles.statLabel}>Time</Text>
+            <Text style={styles.statValuePink}>01:48</Text>
+          </View>
+        </View>
+
+        {/* Octopus Mascot & Speech Bubble */}
+        <View style={styles.mascotRow}>
+          <Text style={styles.mascotIcon}>🐙</Text>
+          <View style={styles.speechBubble}>
+            <Text style={styles.speechTitle}>¡Genial! ¡Se dividen!</Text>
+            <Text style={styles.speechEq}>{currentRecipe.equationText}</Text>
+          </View>
+        </View>
+
+        {/* Sub-Grids Display Area matching Screenshot 2 */}
+        <Animated.View
+          style={[
+            styles.subGridsViewport,
+            { transform: [{ translateX: shakeAnim }] },
+          ]}
+        >
+          <View style={styles.subGridsGrid}>
+            {currentRecipe.subGrids.map((sub, idx) => {
+              const borderCol = subColors[idx % subColors.length];
+              const badgeText = badges[idx % badges.length];
+
+              return (
+                <View
+                  key={`subgrid-${idx}-${sub.rows}x${sub.cols}`}
                   style={[
-                    styles.targetChipText,
-                    isSelected && styles.targetChipTextActive,
+                    styles.subGridCard,
+                    { borderColor: borderCol, shadowColor: borderCol },
                   ]}
                 >
-                  {r}×{c} = {r * c}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
-
-        {/* Big Shake Button */}
-        <Animated.View style={{ transform: [{ translateX: shakeAnim }], width: "94%", alignItems: "center" }}>
-          <Pressable style={styles.shakeButton} onPress={triggerShakeMix}>
-            <Text style={styles.shakeButtonText}>🍹 ¡SACUDIR CÓCTEL DE MULTIPLICACIÓN! 💥</Text>
-          </Pressable>
+                  <View style={[styles.badgeTag, { backgroundColor: borderCol }]}>
+                    <Text style={styles.badgeTagText}>{badgeText}</Text>
+                  </View>
+                  <BlockGrid
+                    rows={sub.rows}
+                    cols={sub.cols}
+                    tableNumber={sub.themeNumber}
+                    interactiveCount={true}
+                    showEquationCard={false}
+                    maxHeightOverhead={410}
+                  />
+                </View>
+              );
+            })}
+          </View>
         </Animated.View>
 
-        {/* Decomposition Summary Card */}
-        <View style={styles.recipeCard}>
-          <Text style={styles.recipeTitle}>{currentRecipe.description}</Text>
-          <Text style={styles.recipeEquation}>{currentRecipe.equationText}</Text>
+        {/* Math Operation Buttons matching Screenshot 2 */}
+        <View style={styles.operationsRow}>
+          <Pressable style={[styles.opCircle, { borderColor: "#10B981" }]}>
+            <Text style={[styles.opSymbol, { color: "#10B981" }]}>×</Text>
+          </Pressable>
+          <Pressable style={[styles.opCircle, { borderColor: "#06B6D4" }]}>
+            <Text style={[styles.opSymbol, { color: "#06B6D4" }]}>÷</Text>
+          </Pressable>
+          <Pressable style={[styles.opCircle, { borderColor: "#EC4899" }]}>
+            <Text style={[styles.opSymbol, { color: "#EC4899" }]}>+</Text>
+          </Pressable>
+          <Pressable style={[styles.opCircle, { borderColor: "#EAB308" }]}>
+            <Text style={[styles.opSymbol, { color: "#EAB308" }]}>=</Text>
+          </Pressable>
         </View>
 
-        {/* Sub-Grids Display Area */}
-        <View style={styles.subGridsViewport}>
-          <View style={styles.subGridsRow}>
-            {currentRecipe.subGrids.map((sub, idx) => (
-              <View
-                key={`subgrid-${idx}-${sub.rows}x${sub.cols}`}
-                style={[
-                  styles.subGridCard,
-                  {
-                    borderColor: getThemeForNumber(sub.themeNumber).primary,
-                    maxWidth: currentRecipe.subGrids.length > 2 ? "48%" : "96%",
-                  },
-                ]}
-              >
-                <Text style={[styles.subGridTitle, { color: getThemeForNumber(sub.themeNumber).darkAccent }]}>
-                  {sub.title}
-                </Text>
-                <BlockGrid
-                  rows={sub.rows}
-                  cols={sub.cols}
-                  tableNumber={sub.themeNumber}
-                  interactiveCount={true}
-                  showEquationCard={false}
-                  maxHeightOverhead={360}
-                />
-              </View>
-            ))}
-          </View>
+        {/* Bottom Shake Action Bar matching Screenshot 2 */}
+        <View style={styles.bottomBarRow}>
+          <Pressable style={styles.numPill}><Text style={styles.numPillText}>1</Text></Pressable>
+          <Pressable style={styles.numPill}><Text style={styles.numPillText}>2</Text></Pressable>
+
+          <Pressable style={styles.goBtn} onPress={triggerShakeMix}>
+            <Text style={styles.goBtnText}>🍹 GO!</Text>
+          </Pressable>
+
+          <Pressable style={styles.numPill}><Text style={styles.numPillText}>4</Text></Pressable>
+          <Pressable style={styles.numPill}><Text style={styles.numPillText}>5</Text></Pressable>
         </View>
 
         <Confetti active={showConfetti} />
@@ -149,97 +161,110 @@ export const MixScreen: React.FC = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F5F7FA",
+    backgroundColor: "#090A1C",
   },
   container: {
     flex: 1,
+    backgroundColor: "#090A1C",
     alignItems: "center",
-    overflow: "hidden",
+    justifyContent: "space-between",
+    paddingBottom: 10,
   },
-  headerBanner: {
-    width: "100%",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
-  },
-  headerTitle: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "900",
-  },
-  headerSubtitle: {
-    color: "rgba(255, 255, 255, 0.95)",
-    fontSize: 12,
-    fontWeight: "600",
-    marginTop: 2,
-  },
-  targetSelectorRow: {
+  headerRow: {
     flexDirection: "row",
-    gap: 8,
-    marginVertical: 6,
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 20,
+    paddingTop: 8,
   },
-  targetChip: {
-    backgroundColor: "#EFEFEF",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 14,
-    borderWidth: 1.5,
-    borderColor: "#DDD",
+  soundIcon: { fontSize: 18, color: "#EC4899" },
+  gearIcon: { fontSize: 18, color: "#06B6D4" },
+  titleText: {
+    fontSize: 22,
+    fontWeight: "900",
+    color: "#EC4899",
+    letterSpacing: 0.5,
+    textShadowColor: "rgba(236, 72, 153, 0.5)",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 8,
   },
-  targetChipActive: {
-    backgroundColor: "#FF2D55",
-    borderColor: "#B80E30",
+  statsRow: {
+    flexDirection: "row",
+    gap: 20,
+    marginVertical: 4,
   },
-  targetChipText: {
-    fontSize: 12,
-    fontWeight: "800",
-    color: "#444444",
-  },
-  targetChipTextActive: {
-    color: "#FFFFFF",
-  },
-  shakeButton: {
-    backgroundColor: "#FF9500",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+  scorePill: {
+    borderWidth: 2,
+    borderColor: "#06B6D4",
     borderRadius: 20,
-    marginVertical: 4,
-    width: "96%",
+    paddingHorizontal: 16,
+    paddingVertical: 3,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
-    elevation: 3,
+    backgroundColor: "#0E102E",
+    shadowColor: "#06B6D4",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.7,
+    shadowRadius: 6,
   },
-  shakeButtonText: {
-    color: "#FFFFFF",
-    fontSize: 14,
-    fontWeight: "900",
-    textAlign: "center",
-  },
-  recipeCard: {
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 12,
-    marginVertical: 4,
+  timePill: {
+    borderWidth: 2,
+    borderColor: "#EC4899",
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 3,
     alignItems: "center",
-    width: "94%",
-    borderWidth: 1.5,
-    borderColor: "#FF2D55",
+    backgroundColor: "#0E102E",
+    shadowColor: "#EC4899",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.7,
+    shadowRadius: 6,
   },
-  recipeTitle: {
-    fontSize: 13,
-    fontWeight: "900",
-    color: "#FF2D55",
-  },
-  recipeEquation: {
-    fontSize: 12,
+  statLabel: {
+    fontSize: 10,
     fontWeight: "800",
-    color: "#333333",
-    marginTop: 2,
+    color: "#8E90B4",
+  },
+  statValueCyan: {
+    fontSize: 15,
+    fontWeight: "900",
+    color: "#FFFFFF",
+  },
+  statValuePink: {
+    fontSize: 15,
+    fontWeight: "900",
+    color: "#EC4899",
+  },
+  statUnit: {
+    fontSize: 11,
+    color: "#06B6D4",
+  },
+  mascotRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginVertical: 2,
+  },
+  mascotIcon: {
+    fontSize: 28,
+  },
+  speechBubble: {
+    backgroundColor: "#16183B",
+    borderWidth: 1.5,
+    borderColor: "#8B5CF6",
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+  },
+  speechTitle: {
+    color: "#A78BFA",
+    fontSize: 11,
+    fontWeight: "900",
+  },
+  speechEq: {
+    color: "#FFFFFF",
+    fontSize: 11,
+    fontWeight: "800",
   },
   subGridsViewport: {
     flex: 1,
@@ -247,29 +272,100 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  subGridsRow: {
+  subGridsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    gap: 8,
+    gap: 10,
     paddingHorizontal: 8,
   },
   subGridCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    backgroundColor: "#121433",
+    borderRadius: 16,
     padding: 6,
     borderWidth: 2,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 2,
-    elevation: 2,
+    position: "relative",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+    elevation: 6,
   },
-  subGridTitle: {
-    fontSize: 11,
+  badgeTag: {
+    position: "absolute",
+    top: -10,
+    right: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 1,
+    borderRadius: 8,
+    zIndex: 10,
+  },
+  badgeTagText: {
+    color: "#FFFFFF",
+    fontSize: 9,
     fontWeight: "900",
-    marginBottom: 2,
+  },
+  operationsRow: {
+    flexDirection: "row",
+    gap: 14,
+    marginVertical: 4,
+  },
+  opCircle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    borderWidth: 2,
+    backgroundColor: "#121433",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  opSymbol: {
+    fontSize: 22,
+    fontWeight: "900",
+  },
+  bottomBarRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingHorizontal: 16,
+  },
+  numPill: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    borderColor: "#84CC16",
+    backgroundColor: "#121433",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  numPillText: {
+    color: "#A3E635",
+    fontWeight: "900",
+    fontSize: 13,
+  },
+  goBtn: {
+    backgroundColor: "#06B6D4",
+    paddingHorizontal: 24,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#38BDF8",
+    shadowColor: "#06B6D4",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  goBtnText: {
+    color: "#FFFFFF",
+    fontWeight: "900",
+    fontSize: 15,
   },
 });

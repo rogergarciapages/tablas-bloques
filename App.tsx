@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.root}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" backgroundColor="#090A1C" />
 
       {/* Main Screen Content */}
       <View style={styles.screenContainer}>{renderActiveScreen()}</View>
@@ -111,46 +111,53 @@ export default function App() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#F5F7FA",
+    backgroundColor: "#090A1C",
   },
   screenContainer: {
     flex: 1,
+    backgroundColor: "#090A1C",
   },
   tabBar: {
     flexDirection: "row",
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 6,
+    backgroundColor: "#10122B",
+    paddingVertical: 8,
     paddingHorizontal: 8,
-    borderTopWidth: 1,
-    borderTopColor: "#E0E0E0",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 8,
+    borderTopWidth: 1.5,
+    borderTopColor: "rgba(99, 102, 241, 0.4)",
+    shadowColor: "#6366F1",
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 12,
     justifyContent: "space-around",
   },
   tabItem: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 14,
+    paddingVertical: 5,
+    paddingHorizontal: 12,
+    borderRadius: 16,
   },
   tabItemActive: {
-    backgroundColor: "#FFE082",
+    backgroundColor: "rgba(99, 102, 241, 0.25)",
+    borderWidth: 1,
+    borderColor: "#6366F1",
+    shadowColor: "#6366F1",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
   },
   tabIcon: {
-    fontSize: 18,
-    marginBottom: 1,
+    fontSize: 19,
+    marginBottom: 2,
   },
   tabLabel: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#666666",
+    color: "#8E90B4",
   },
   tabLabelActive: {
-    color: "#333333",
+    color: "#FFD700",
     fontWeight: "900",
   },
 });

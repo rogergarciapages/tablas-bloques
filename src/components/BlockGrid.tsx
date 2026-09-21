@@ -104,15 +104,17 @@ export const BlockGrid: React.FC<BlockGridProps> = ({
     setCountedIndices(new Set());
   };
 
+  const colColors = ["#F97316", "#EAB308", "#10B981", "#06B6D4", "#EC4899", "#8B5CF6"];
+
   return (
     <View style={styles.container}>
       {/* Equation Banner */}
       {showEquationCard && (
-        <View style={[styles.equationCard, { backgroundColor: theme.lightAccent, borderColor: theme.primary }]}>
+        <View style={styles.equationCard}>
           <View style={styles.equationRow}>
-            <Text style={[styles.factorText, { color: theme.darkAccent }]}>{rows}</Text>
+            <Text style={[styles.factorText, { color: theme.primary }]}>{rows}</Text>
             <Text style={styles.opText}>×</Text>
-            <Text style={[styles.factorText, { color: theme.darkAccent }]}>{cols}</Text>
+            <Text style={[styles.factorText, { color: theme.glowColor || "#38BDF8" }]}>{cols}</Text>
             <Text style={styles.opText}>=</Text>
             <View style={[styles.totalBadge, { backgroundColor: theme.primary }]}>
               <Text style={styles.totalBadgeText}>{total}</Text>
@@ -133,30 +135,36 @@ export const BlockGrid: React.FC<BlockGridProps> = ({
 
       {/* Grid Container with Row and Column Indicators */}
       <View style={styles.gridOuterWrapper}>
-        {/* Top Column Labels */}
-        <View style={[styles.topColLabelsRow, { marginLeft: 18 }]}>
-          {Array.from({ length: cols }).map((_, c) => (
-            <View key={`col-hdr-${c}`} style={[styles.colBadge, { width: blockSize, marginHorizontal: 1.2 }]}>
-              <Text style={styles.colBadgeText}>{c + 1}</Text>
-            </View>
-          ))}
+        {/* Top Column Labels (1, 2, 3, 4...) */}
+        <View style={[styles.topColLabelsRow, { marginLeft: 24 }]}>
+          {Array.from({ length: cols }).map((_, c) => {
+            const hdrColor = colColors[c % colColors.length];
+            return (
+              <View key={`col-hdr-${c}`} style={[styles.colBadge, { width: blockSize, marginHorizontal: 1.5 }]}>
+                <Text style={[styles.colBadgeText, { color: hdrColor }]}>{c + 1}</Text>
+              </View>
+            );
+          })}
         </View>
 
         <View style={styles.gridWithRowLabels}>
-          {/* Left Row Labels */}
+          {/* Left Row Labels (1, 2, 3...) */}
           <View style={styles.leftRowLabelsCol}>
-            {Array.from({ length: rows }).map((_, r) => (
-              <View
-                key={`row-hdr-${r}`}
-                style={[styles.rowBadge, { height: blockSize, marginVertical: 1.2, backgroundColor: theme.secondary }]}
-              >
-                <Text style={styles.rowBadgeText}>{r + 1}</Text>
-              </View>
-            ))}
+            {Array.from({ length: rows }).map((_, r) => {
+              const hdrColor = colColors[r % colColors.length];
+              return (
+                <View
+                  key={`row-hdr-${r}`}
+                  style={[styles.rowBadge, { height: blockSize, marginVertical: 1.5 }]}
+                >
+                  <Text style={[styles.rowBadgeText, { color: hdrColor }]}>{r + 1}</Text>
+                </View>
+              );
+            })}
           </View>
 
           {/* Matrix of NumberBlocks */}
-          <View style={[styles.matrixContainer, { borderColor: isSquare ? "#FFD700" : theme.primary }]}>
+          <View style={[styles.matrixContainer, { borderColor: isSquare ? "#FFD700" : "rgba(99, 102, 241, 0.4)" }]}>
             {Array.from({ length: rows }).map((_, r) => (
               <View key={`row-${r}`} style={styles.matrixRow}>
                 {Array.from({ length: cols }).map((_, c) => {
@@ -212,60 +220,64 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   equationCard: {
-    paddingHorizontal: 12,
-    paddingVertical: 3,
-    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 14,
     borderWidth: 1.5,
+    borderColor: "rgba(99, 102, 241, 0.4)",
+    backgroundColor: "#121433",
     alignItems: "center",
-    marginBottom: 4,
+    marginBottom: 6,
     maxWidth: 360,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 2,
-    elevation: 2,
+    shadowColor: "#6366F1",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
   },
   equationRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 5,
+    gap: 6,
   },
   factorText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "900",
   },
   opText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "800",
-    color: "#444444",
+    color: "#8E90B4",
   },
   totalBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 1,
-    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    borderRadius: 10,
   },
   totalBadgeText: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "900",
   },
   equationSubtext: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: "600",
-    color: "#555555",
-    marginTop: 1,
-  },
-  squareBanner: {
-    backgroundColor: "#FFD700",
-    paddingHorizontal: 6,
-    paddingVertical: 1,
-    borderRadius: 6,
+    color: "#A0A2C7",
     marginTop: 2,
   },
+  squareBanner: {
+    backgroundColor: "rgba(255, 215, 0, 0.2)",
+    borderColor: "#FFD700",
+    borderWidth: 1,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 8,
+    marginTop: 4,
+  },
   squareBannerText: {
-    color: "#5C4000",
+    color: "#FFD700",
     fontWeight: "900",
-    fontSize: 9,
+    fontSize: 10,
     textAlign: "center",
   },
   gridOuterWrapper: {
@@ -273,79 +285,77 @@ const styles = StyleSheet.create({
   },
   topColLabelsRow: {
     flexDirection: "row",
-    marginBottom: 1,
+    marginBottom: 3,
   },
   colBadge: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#E0E0E0",
-    borderRadius: 3,
-    paddingVertical: 0.5,
   },
   colBadgeText: {
-    fontSize: 8.5,
-    fontWeight: "700",
-    color: "#444444",
+    fontSize: 11,
+    fontWeight: "900",
   },
   gridWithRowLabels: {
     flexDirection: "row",
     alignItems: "center",
   },
   leftRowLabelsCol: {
-    marginRight: 3,
+    marginRight: 4,
+    width: 20,
   },
   rowBadge: {
-    width: 14,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 3,
   },
   rowBadgeText: {
-    fontSize: 8.5,
-    fontWeight: "700",
-    color: "#FFFFFF",
+    fontSize: 11,
+    fontWeight: "900",
   },
   matrixContainer: {
-    padding: 2,
-    borderRadius: 8,
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
-    borderWidth: 1.5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
+    padding: 4,
+    borderRadius: 16,
+    backgroundColor: "#121433",
+    borderWidth: 2,
+    shadowColor: "#6366F1",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
+    elevation: 6,
   },
   matrixRow: {
     flexDirection: "row",
   },
   controlsRow: {
     flexDirection: "row",
-    gap: 8,
-    marginTop: 4,
+    gap: 10,
+    marginTop: 8,
   },
   actionBtn: {
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 1.5,
-    elevation: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 16,
+    borderWidth: 1.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   autoCountBtn: {
-    backgroundColor: "#34C759",
+    backgroundColor: "#10B981",
+    borderColor: "#34D399",
+    shadowColor: "#10B981",
   },
   resetBtn: {
-    backgroundColor: "#FF9500",
+    backgroundColor: "#F97316",
+    borderColor: "#FB923C",
+    shadowColor: "#F97316",
   },
   btnDisabled: {
     opacity: 0.5,
   },
   actionBtnText: {
     color: "#FFFFFF",
-    fontWeight: "800",
-    fontSize: 11,
+    fontWeight: "900",
+    fontSize: 12,
   },
 });
